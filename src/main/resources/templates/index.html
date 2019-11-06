@@ -4,18 +4,14 @@
     <title>Hello WebSocket</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
+
     <!-- sockjs와 stomp 라이브러리를 import 해왔다 꼭 해줘야하는 부분임. gradle로 external library 에 저장했는데 정확하게 쓰려면 이래야되나봐
       webjars 는 클라이언트 라이브러리를 관리하는 일을 한다, 그래서 gradle에 추가해서 자바 라이브러리처럼 했다가 여기에 다시 와서 써주는 것임
        webjars 자케가 필요한 라이브러리가 아니고 뭉텅이니까. 클라이언트 의존성 관리가 쉽고 버젼도 한번에 들쭉날쭉하게 안되니까 관리가 쉽겠지지-->
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="/app.js"></script>
 </head>
+
 <body>
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
-    enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
+
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
@@ -33,6 +29,8 @@
                 <div class="form-group">
                     <label for="name">What is your name?</label>
                     <input type="text" id="name" class="form-control" placeholder="Your name here...">
+                    <label for="content">What is your content?</label>
+                    <input type="text" id="content" class="form-control" placeholder="Your content here...">
                 </div>
                 <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>
@@ -52,5 +50,10 @@
         </div>
     </div>
 </div>
+
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script type="text/javascript" src="/app.js"></script>
 </body>
 </html>

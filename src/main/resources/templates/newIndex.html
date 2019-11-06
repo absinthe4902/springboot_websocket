@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title th:text="|${userName}의 채팅방|"></title>
+    <link rel="stylesheet" href="/newMain.css">
+</head>
+<body>
+<div class="connection">
+    <form class="form-inline">
+        <div class="form-group">
+            <button id="connect" class="connection_btn white" type="button">Connect</button>
+            <button id="disconnect" class="disconnection_btn purple" type="button" disabled="disabled">Disconnect
+            </button>
+        </div>
+    </form>
+</div>
+<div id="mario-chat">
+    <div id="chat-window">
+        <div class="output" id="output"></div>
+        <div class="feedback" id="feedback"></div>
+    </div>
+    <input type="hidden" id="name" th:value="${userName}">
+    <input type="text" id="content" placeholder="content here">
+    <button type="submit" class="send_btn" id="send">Send</button> <!--일단 여기 페이지 넘어갈까봐 버튼 타입에 button 넣어둠 -->
+</div>
+</div>
+
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script type="text/javascript" src="/app.js"></script>
+</body>
+</html>
