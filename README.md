@@ -37,11 +37,7 @@ passes to clients which subscribe the channel.
 ## key point code ## 
 
 1. controller 
-'''
-@Controller
-    public class GreetingController {
-
-    Logger log = LoggerFactory.getLogger(GreetingController.class);
+     Logger log = LoggerFactory.getLogger(GreetingController.class);
 
     //클라이언트가 app/hello로 달고 오쳥을 보내면 controller가 messagemapping으로 잡는거겠지?
     @MessageMapping("/hello/{roomKey}")
@@ -60,9 +56,7 @@ passes to clients which subscribe the channel.
         //TODO: 나중에 직접 문자열을 보내주기
         return new FullGreeting(input.getName(), input.getContent());
     }
-'''
 
-    }
 
 
 2. javascript 
