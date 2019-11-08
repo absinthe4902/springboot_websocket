@@ -1,5 +1,20 @@
 # springboot_websocket
 ## making chatting room using websocket in spring ## 
+------------------------------------------------------
+## performance gif ## 
+
+1. performance for maintaining various group chatting room. not use another websocekt. only one websocket is used and many different channel is used to serve these channel.
+
+![test1](https://user-images.githubusercontent.com/35620531/68463980-0d7c1c00-0253-11ea-9c8e-7d9b1aadfe1c.gif)
+
+
+
+2. because they are using other channels, so messages can't be sent to each others. keep an eye on Controller setting. 
+
+![test2](https://user-images.githubusercontent.com/35620531/68464040-30a6cb80-0253-11ea-9141-a4f81f6713e4.gif)
+
+
+-----------------------------------------------
 
 ## code practice point ##
 1. using websocket, sockjs and stomp.
@@ -88,15 +103,3 @@ passes to clients which subscribe the channel.
     };
 
 
-## performance gif ## 
-
-1. performance for maintaining various group chatting room. not use another websocekt. only one websocket is used and many different channel is used to serve these channel.
-
-![so much fun](C:\Users\dnx\Desktop\test1.gif)
-
-
-2. because they are using other channels, so messages can't be sent to each others. keep an eye on Controller setting. 
-
-
-## reference ##
-1. 
