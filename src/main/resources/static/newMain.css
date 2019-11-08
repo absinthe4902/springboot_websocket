@@ -88,6 +88,28 @@ input{
     width: 100%;
     border-radius: 0 0 2px 2px;
 }
+.make_btn {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 0;
+    border-radius: 0 0 2px 2px;
+    width: 100%;
+    font-size: 18px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+}
+
+.make_btn:hover {
+    background: #575ed8;
+    letter-spacing: 1px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+
 
 .connection_btn {
     color: #fff !important;
@@ -147,4 +169,59 @@ input{
     background: #f9f9f9;
     padding: 50px 20px;
     text-align: center;
+}
+
+td {
+    font-size: 13px;
+}
+thead {
+    font-size: 13px;
+}
+
+.tr-chat {
+    cursor: pointer;
+}
+
+.header {
+    padding-left: 20px;
+}
+
+/*
+얘는 내가 마우스를 가져가야 흔든다
+내가 원하는 방향은 값이 0일때 흔들리는 것
+@-webkit-keyframes shake {
+    0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+    10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+    30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+    40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+    50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+    70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+    80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+    90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+    100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake:hover {
+    -webkit-animation-name: shake;
+    -webkit-animation-duration: 0.5s;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: infinite;
+}
+.shake {
+    display:inline-block
+}*/
+.shake {
+    -webkit-animation: shake .2s linear 0s 4;
+    animation: shake .2s linear 0s 4;
+}
+
+
+@-webkit-keyframes shake {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+}
+@keyframes shake {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
 }

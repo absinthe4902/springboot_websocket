@@ -1,3 +1,6 @@
+$(document).ready(function () {
+
+
 let output = document.getElementById('output');
 let content = document.getElementById('content');
 let feedback = document.getElementById('feedback');
@@ -5,13 +8,19 @@ let feedback = document.getElementById('feedback');
 //한명이 타이핑중이면 그거 보여주려고
 let conenctStatus = false;
 let keyFired = false;
+let roomKey = $('#roomId').val();
+    let greetingUrl = '/topic/greetings/' + roomKey;
+    let waitingUrl = '/topic/waiting/' + roomKey;
+    let helloUrl ="/app/hello/" + roomKey;
+    let typingUrl = '/app/typing/' + roomKey;
 
 let stompClient = null;
 
 
 let newMessage = {
     name: $("#name").val(),
-    content: "*새로운 유저가 입장하였습니다*"
+    content: "*새로운 유저가 입장하였습니다*",
+    roomId: $('#roomId').val()
 };
 
 
@@ -32,21 +41,24 @@ function setConnected(connected) {
 }
 
 
-//TODO: 즉시 연결되는 서버
+
 function connect() {
     let socket = new SockJS('/endpoint-websocket');
+
     stompClient = Stomp.over(socket);
      stompClient.connect({}, async function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
         conenctStatus = true;
 
-       await stompClient.subscribe('/topic/greetings', function (greeting) {
+
+       await stompClient.subscribe(greetingUrl , function (greeting) {
             showGreeting(JSON.parse(greeting.body));
         });
 
-       await stompClient.send("/app/hello", {}, JSON.stringify(newMessage));
-        stompClient.subscribe('/topic/waiting', function (waiting) {
+       await stompClient.send(helloUrl, {}, JSON.stringify(newMessage));
+
+        stompClient.subscribe(waitingUrl, function (waiting) {
             let waitVo = JSON.parse(waiting.body);
             if(waitVo.name !== $("#name").val()) {
                 feedback.innerHTML += '<p><strong>' + waitVo.name + ': </strong>' + waitVo.content + '</p>';
@@ -78,12 +90,13 @@ function disconnect() {
 function sendName() {
     let sendData = {
         name: $("#name").val(),
-        content: $("#content").val()
+        content: $("#content").val(),
+        roomId: $('#roomId').val()
     };
 
 
 
-    stompClient.send("/app/hello", {}, JSON.stringify(sendData));
+    stompClient.send(helloUrl, {}, JSON.stringify(sendData));
     keyFired = false;
     $("#content").val("");
 }
@@ -110,10 +123,11 @@ $(function () {
     $("#disconnect").click(function () {
         let byeUser = {
             name: $("#name").val(),
-            content: "*접속을 종료합니다.*"
+            content: "*접속을 종료합니다.*",
+            roomId: $('#roomId').val()
         };
 
-        stompClient.send("/app/hello", {}, JSON.stringify(byeUser));
+        stompClient.send(helloUrl, {}, JSON.stringify(byeUser));
         disconnect();
     });
     $("#send").click(function () {
@@ -123,17 +137,20 @@ $(function () {
     content.addEventListener('keydown', function () {
         let typing = {
             name: $("#name").val(),
-            content: "*입력중입니다.....*"
+            content: "*입력중입니다.....*",
+            roomId: $('#roomId').val()
         };
 
         if (conenctStatus && !keyFired) {
-            stompClient.send("/app/typing", {}, JSON.stringify(typing));
+            stompClient.send(typingUrl, {}, JSON.stringify(typing));
             keyFired = true;
         }
 
     });
 });
 
+
+});
 
 
 

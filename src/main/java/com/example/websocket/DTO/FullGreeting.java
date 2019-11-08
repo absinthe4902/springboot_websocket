@@ -4,6 +4,7 @@ package com.example.websocket.DTO;
 public class FullGreeting {
     private String name;
     private String content;
+    private String roomId;
 
     //뭘 쓸지 모르니까 일단 생성자 많이 만들자~
     public FullGreeting() {}
@@ -16,6 +17,12 @@ public class FullGreeting {
     public FullGreeting(String name, String content) {
         this.name = name;
         this.content = content;
+    }
+
+    public FullGreeting(String name, String content, String roomId) {
+        this.name = name;
+        this.content = content;
+        this.roomId = roomId;
     }
 
     public void setName(String name) {
@@ -32,5 +39,12 @@ public class FullGreeting {
 
     public String getContent() {
         return content;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 }

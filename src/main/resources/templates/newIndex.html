@@ -4,22 +4,27 @@
     <meta charset="utf-8">
     <title th:text="|${userName}의 채팅방|"></title>
     <link rel="stylesheet" href="/newMain.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <div class="connection">
-    <form class="form-inline">
-        <div class="form-group">
+
+        <div>
+            <h5 class="header" th:text="|채팅방 이름: ${roomName}|"></h5>
             <button id="connect" class="connection_btn white" type="button">Connect</button>
             <button id="disconnect" class="disconnection_btn purple" type="button" disabled="disabled">Disconnect
             </button>
         </div>
-    </form>
+
 </div>
+
 <div id="mario-chat">
     <div id="chat-window">
         <div class="output" id="output"></div>
         <div class="feedback" id="feedback"></div>
     </div>
+    <input type="hidden" id="roomId" th:value="${roomId}">
+    <input type="hidden" id="roomName" th:value="${roomName}">
     <input type="hidden" id="name" th:value="${userName}">
     <input type="text" id="content" placeholder="content here">
     <button type="submit" class="send_btn" id="send">Send</button> <!--일단 여기 페이지 넘어갈까봐 버튼 타입에 button 넣어둠 -->
@@ -29,6 +34,7 @@
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="/app.js"></script>
 </body>
 </html>

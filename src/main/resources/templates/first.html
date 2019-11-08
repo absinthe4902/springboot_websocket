@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Enter page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/newMain.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+
 </head>
 
 <body>
@@ -15,11 +19,15 @@
         <div>3. 계좌번호, 주소와 같은 개인정보를 물어볼 경우 강퇴입니다.</div>
         <div>4. 서로를 배려하며 즐거운 채팅합시다.</div>
     </div>
-    <form action="http://localhost:8080/chatroom" method="get">
+   <!-- <form action="http://localhost:8080/list" method="get">-->
+    <form>
+
     <input type="text" id="name" name="name" placeholder="user name here">
-    <button type="submit" class="send_btn" id="enter">Enter</button> <!--일단 여기 페이지 넘어갈까봐 버튼 타입에 button 넣어둠 -->
+
+    <button type="button" class="make_btn" id="enter">Enter</button> <!--일단 여기 페이지 넘어갈까봐 버튼 타입에 button 넣어둠 -->
     </form>
 </div>
-</div>
+
+<script type="text/javascript" src="/userNameCheck.js"></script>
 </body>
 </html>

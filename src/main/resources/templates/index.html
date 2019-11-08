@@ -1,59 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hello WebSocket</title>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/main.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Enter page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/newMain.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
-    <!-- sockjs와 stomp 라이브러리를 import 해왔다 꼭 해줘야하는 부분임. gradle로 external library 에 저장했는데 정확하게 쓰려면 이래야되나봐
-      webjars 는 클라이언트 라이브러리를 관리하는 일을 한다, 그래서 gradle에 추가해서 자바 라이브러리처럼 했다가 여기에 다시 와서 써주는 것임
-       webjars 자케가 필요한 라이브러리가 아니고 뭉텅이니까. 클라이언트 의존성 관리가 쉽고 버젼도 한번에 들쭉날쭉하게 안되니까 관리가 쉽겠지지-->
+    <script th:inline="javascript">
+        $(document).ready(function () {
+
+            let finalChatRoom = '';
+            let userName = [[${userName}]];
+            $('#create').on('click', function () {
+                window.open('/prepareroom?name=' + userName, "show-popup","width=660,height=700", false);
+            });
+
+            $('.tr-chat').on('click', function () {
+                let cChatRoom = $(this).find('.room-name').text();
+
+                finalChatRoom = cChatRoom;
+
+                let data = {
+                    roomName: finalChatRoom
+                };
+                let Jdata = JSON.stringify(data);
+
+                $.ajax({
+                    url: "/findroom",
+                    method: "post",
+                    data: Jdata,
+                    contentType: "application/json"
+                })
+                    .done(function (data) {
+                        console.log(data);
+                        let chatRoomVO = data;
+
+                        location.href = "/chatroom?name=" + userName + "&roomName=" + chatRoomVO.roomName + "&roomId=" + chatRoomVO.roomId;
+                    })
+                    .fail(function () {
+                        console.log("네트워크 오류로 인해 채팅 방 찾기 실패!");
+                    })
+            });
+
+        });
+    </script>
 </head>
 
 <body>
+<div>
+    <h2 th:text="|어서오세요, ${userName} 님!|"></h2>
+</div>
+<div id="mario-chat">
+    <div id="first-window">
+        <div th:if="${length==0}">
+            <span>진행중인 채팅방이 없습니다</span>
+        </div>
 
-<div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
-                    <label for="content">What is your content?</label>
-                    <input type="text" id="content" class="form-control" placeholder="Your content here...">
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
+        <div th:if="${length!=0}">
+            <table class="table table-striped">
+                <thead >
                 <tr>
-                    <th>Greetings</th>
+                    <td scope="col">채팅방 이름</td>
+                    <td scope="col">방장</td>
+                    <td scope="col">개장 날짜</td>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+
+                <tbody>
+                <tr th:each="listVO: ${chatList}" class="tr-chat">
+                    <td class="room-name" scope="row" th:text="${listVO.roomName}"></td>
+                    <td scope="row" th:text="${listVO.leaderName}"></td>
+                    <td scope="row" th:text="${listVO.time}"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <form>
+        <button type="button" class="make_btn" id="create">방만들기</button> <!--일단 여기 페이지 넘어갈까봐 버튼 타입에 button 넣어둠 -->
+    </form>
+
 </div>
 
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<script type="text/javascript" src="/app.js"></script>
 </body>
 </html>
