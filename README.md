@@ -37,7 +37,7 @@ passes to clients which subscribe the channel.
 ## key point code ## 
 
 1. controller 
-    @Controller
+ '''@Controller
     public class GreetingController {
 
     Logger log = LoggerFactory.getLogger(GreetingController.class);
@@ -59,7 +59,7 @@ passes to clients which subscribe the channel.
         //TODO: 나중에 직접 문자열을 보내주기
         return new FullGreeting(input.getName(), input.getContent());
     }
-
+'''
 
 
     }
