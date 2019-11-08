@@ -36,6 +36,8 @@ passes to clients which subscribe the channel.
 
 ## key point code ## 
 
+-controller- 
+
      Logger log = LoggerFactory.getLogger(GreetingController.class);
 
     //클라이언트가 app/hello로 달고 오쳥을 보내면 controller가 messagemapping으로 잡는거겠지?
@@ -57,6 +59,8 @@ passes to clients which subscribe the channel.
     }
 
 
+
+-javascript-
 
        function connect() {
     let socket = new SockJS('/endpoint-websocket');
