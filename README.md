@@ -38,7 +38,7 @@ passes to clients which subscribe the channel.
 
 1. controller 
     @Controller
-public class GreetingController {
+    public class GreetingController {
 
     Logger log = LoggerFactory.getLogger(GreetingController.class);
 
@@ -62,7 +62,7 @@ public class GreetingController {
 
 
 
-}
+    }
 
 
 2. javascript 
@@ -89,7 +89,7 @@ public class GreetingController {
             }
         });
     });
-};
+    };
 
 
 ## performance gif ## 
