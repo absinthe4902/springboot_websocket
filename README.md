@@ -58,8 +58,7 @@ passes to clients which subscribe the channel.
 
 
 
-2. javascript 
-    function connect() {
+       function connect() {
     let socket = new SockJS('/endpoint-websocket');
 
     stompClient = Stomp.over(socket);
@@ -89,6 +88,7 @@ passes to clients which subscribe the channel.
 
 1. performance for maintaining various group chatting room. not use another websocekt. only one websocket is used and many different channel is used to serve these channel.
 
+![so much fun](C:\Users\dnx\Desktop\test1.gif)
 
 
 2. because they are using other channels, so messages can't be sent to each others. keep an eye on Controller setting. 
